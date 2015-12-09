@@ -1,0 +1,24 @@
+{
+  "name": "athena-server",
+  "version": "1.0.0",
+  "description": "\"athena tools and client api\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wengeek",
+  "license": "MIT",
+  "dependencies": {
+    "adm-zip": "^0.4.7",
+    "body-parser": "^1.14.1",
+    "connect-mongo": "^0.8.2",
+    "cookie-parser": "^1.4.0",
+    "express": "^4.13.3",
+    "express-session": "^1.12.1",
+    "mongoose": "^4.2.5",
+    "mongoose-user": "0.0.1",
+    "multer": "^1.1.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
+  }
+}
