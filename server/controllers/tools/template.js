@@ -12,7 +12,7 @@ exports.index = function(req, res) {
   TemplateHelper.findAll().then(function(templates) {
     var ret = {
       items: [{
-        _id: '0000',
+        _id: 'default',
         name: '默认模板'
       }],
       version: 0

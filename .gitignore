@@ -4,3 +4,6 @@ logs
 *.log
 .tern-project
 *.swp
+server/static
+server/public
+

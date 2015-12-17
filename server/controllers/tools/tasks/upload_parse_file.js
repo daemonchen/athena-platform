@@ -11,12 +11,13 @@ module.exports = function(fileDes) {
       resolve(JSON.parse(data.toString()));
     });
   }), new Promise(function(resolve, reject) {
-    fs.readFile(path.join(fileDes, 'module-conf.js'), function(err, data) {
-      if (err) {
-        reject(err);
+    fs.exists(path.join(fileDes, 'module-conf.js'), function(exists) {
+      if (!exists) {
+        return reject('module-conf.js was not existed');
       }
 
-      resolve(eval(data.toString()));
+      var modConf = require(path.join(fileDes, 'module-conf.js'));
+      resolve(modConf);
     });
   })]);
 };
