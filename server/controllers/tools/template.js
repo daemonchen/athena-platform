@@ -6,9 +6,9 @@ var tempConfig = require('../../config/template');
 var zipPath = path.join(tempConfig.zip, 'template.zip');
 var tempPath = tempConfig.path;
 var TemplateHelper = require('../../helpers/template');
+var crypto = require('crypto');
 var md5File = require('md5-file');
-var lastModTime = new Date();
-var isEmpty = true;
+var lastVersion = -1;
 var zip = new AdmZip();
 
 exports.index = function(req, res) {
@@ -20,7 +20,7 @@ exports.index = function(req, res) {
       }],
       version: 0
     };
-    var signal = {};
+    var signal = null;
     if (templates.length > 0) {
       signal = templates[0];
       ret.items.push({
@@ -36,20 +36,18 @@ exports.index = function(req, res) {
           name: templates[i].name
         });
       }
+
+      if (signal) {
+        var md5 = crypto.createHash('md5');
+        md5.update('' + signal.lastMod);
+        ret.version = md5.digest('hex');
+      }
     }
 
-    if (signal.lastMod) {
-      if (lastModTime.getTime() !== signal.lastMod.getTime()) {
-        lastModTime = signal.lastMod;
-        zip.addLocalFolder(tempPath);
-        zip.writeZip(zipPath);
-      }
-    } else {
-      if (isEmpty) {
-        isEmpty = false;
-        zip.addLocalFolder(tempPath);
-        zip.writeZip(zipPath);
-      }
+    if (lastVersion !== ret.version) {
+      lastVersion = ret.version;
+      zip.addLocalFolder(tempPath);
+      zip.writeZip(zipPath);
     }
 
     md5File(zipPath, function(err, sum) {
