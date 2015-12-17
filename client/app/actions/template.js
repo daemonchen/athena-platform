@@ -1,4 +1,4 @@
-import {REQUEST_TEMPLATES, REQUEST_TEMPLATE, ADD_TEMPLATE, UPDATE_TEMPLATE} from '../constants/ActionTypes';
+import {REQUEST_TEMPLATES, REQUEST_TEMPLATE, ADD_TEMPLATE, UPDATE_TEMPLATE, TEMPLATE_CONTENT} from '../constants/ActionTypes';
 import fetchData from '../utils/fetchData';
 
 /**
@@ -22,7 +22,7 @@ export function requestAddTemplate(params, redirect) {
       },
       body: JSON.stringify(params)
     }, function(json) {
-      dispatch(addTemplate(redirect));
+      dispatch(addTemplate(redirect + json.data._id));
     });
   };
 }
@@ -66,14 +66,15 @@ export function requestTemplate(templateId) {
 /**
  * 更新模板
  */
-function updateTemplate(redirect) {
+function updateTemplate(template, content) {
   return {
     type: UPDATE_TEMPLATE,
-    redirect
+    template: template,
+    content: content
   };
 }
 
-export function requestUpdateTemplate(params, redirect) {
+export function requestUpdateTemplate(params, cb) {
   return dispatch => {
     fetchData(dispatch, '/template/update', {
       method: 'post',
@@ -84,7 +85,26 @@ export function requestUpdateTemplate(params, redirect) {
       },
       body: JSON.stringify(params)
     }, function(json) {
-      dispatch(addTemplate(redirect));
+      cb && cb();
+      dispatch(updateTemplate(json.data, params.content));
     });
   };
+}
+
+/**
+ * 获取文件内容
+ */
+function pageContent(content) {
+  return {
+    type: TEMPLATE_CONTENT,
+    content
+  }
+}
+
+export function requestGetPageContent(file, templateId) {
+  return dispatch => {
+    fetchData(dispatch, '/template/getContent?' + (templateId ? 'templateId=' + templateId + '&' : '') + 'file=' + file, function(json) {
+      dispatch(pageContent(json.data));
+    });
+  }
 }

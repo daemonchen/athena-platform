@@ -12,7 +12,8 @@ var AppSchema = new Schema({
   author: String, //暂时没有用户模块
   //author: {type: Schema.Types.ObjectId, ref: 'User'},
   modules: [{type: String, ref: 'Mod'}],
-  template: {type: Schema.Types.ObjectId, ref: 'Template'}
+  template: {type: Schema.Types.ObjectId, ref: 'Template'},
+  members: [{type: String}]
 });
 
 AppSchema.plugin(lastMod);
@@ -20,6 +21,18 @@ AppSchema.plugin(lastMod);
 AppSchema.pre('save', function(next) {
   this.modules = this.modules.filter(function(mod, index) {
     return this.modules.indexOf(mod) === index;
+  }.bind(this));
+
+  this.members = this.members.map(function(member) {
+    return member.trim();
+  });
+
+  if (this.members.length === 0 || this.members.indexOf(this.author) === -1) {
+    this.members.push(this.author);
+  }
+
+  this.members = this.members.filter(function(member ,index) {
+    return this.members.indexOf(member) === index;
   }.bind(this));
 
   next();

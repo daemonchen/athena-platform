@@ -115,3 +115,31 @@ exports.search = function(req, res) {
       });
   }
 }
+
+exports.update = function(req, res) {
+  var appid = req.query.appid;
+  var members = req.body.members;
+
+  if (!req.isAuthenticated()) {
+    return handler.handleError(res, code.NO_LOGIN, 'user need login');
+  }
+
+  if (!appid) {
+    return handler.handleError(res, code.FAILURE, 'error appid');
+  }
+
+  AppHelper.findOne({_id: appid}).then(function(app) {
+    app.members = members && members.split(',') || [];
+
+    app.save(function(err, app) {
+      if (err) {
+        return handler.handleError(res, code.FAILURE, err);
+      }
+
+      handler.send(res, code.SUCCESS, app);
+    });
+  }).catch(function(err) {
+    console.log(err);
+    handler.handleError(res, code.FAILURE, err);
+  });
+}

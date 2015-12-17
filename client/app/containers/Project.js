@@ -2,15 +2,16 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import SearchForm from '../components/projects/SearchForm';
 import SearchResult from '../components/projects/SearchResult';
-import ProjectItem from '../components/projects/ProjectItem';
+import ProjectDesc from '../components/projects/ProjectDesc';
 import ModuleItem from '../components/projects/ModuleItem';
-import {requestProject, requestSearch} from '../actions/projects';
+import {requestProject, requestSearch, requestUpdateMembers} from '../actions/projects';
 
 class Project extends Component {
   constructor(props) {
     super(props);
     this.search = this.search.bind(this);
     this.hideResult = this.hideResult.bind(this);
+    this.handleUpdateMembers = this.handleUpdateMembers.bind(this);
     this.state = {isSearching: false};
   }
 
@@ -22,7 +23,7 @@ class Project extends Component {
       dispatch(requestProject(appid));
     }
     $('ul.tabs').tabs();
-    $('.collapsible').collapsible();
+    $('.tab-content').collapsible();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -36,10 +37,16 @@ class Project extends Component {
 
   componentDidUpdate(nextProps) {
     $('ul.tabs').tabs();
-    $('.collapsible').collapsible();
+    $('.tab-content').collapsible();
     if (this.props.location.action === 'PUSH') {
-      $('.collapsible').collapsible();
+      $('.tab-content').collapsible();
     }
+  }
+
+  handleUpdateMembers(value) {
+    const {dispatch, params} = this.props;
+
+    dispatch(requestUpdateMembers(params.projectId, value));
   }
 
   search(value) {
@@ -83,7 +90,8 @@ class Project extends Component {
               }
               {!isFetching && hasResult &&
                 <SearchResult result={result} />
-                ||
+              }
+              {!isFetching && !hasResult &&
                 <div className="result-loading">搜索不到任何数据</div>
               }
             </div>
@@ -91,7 +99,7 @@ class Project extends Component {
         }
         {project._id &&
           <ul className="collapsible desc" data-collapsible="expandable">
-            <ProjectItem project={project} />
+            <ProjectDesc project={project} handleUpdateMembers={this.handleUpdateMembers}/>
           </ul>
         }
         <div className="row menu">

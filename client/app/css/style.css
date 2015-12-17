@@ -392,12 +392,16 @@ body {
 }
 
 .template .editor > h4{
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #D84D53;
 }
 
 .ace_gutter-cell.ace_error{
-    background: none;
+  background: none !important;
+}
+
+.ace_gutter-cell.ace_warning {
+  background: none !important;
 }
 
 .project-add h4 {
@@ -436,4 +440,48 @@ body {
 .initapps p .prerelation {
   display: block;
   padding-left: .5rem;
+}
+
+.appdesc .members {
+  padding-left: 10px;
+}
+
+.template .template-folder {
+  margin-top: 10px;
+}
+
+.template .template-folder .folder{
+  font-size: .95rem;
+  margin: 0;
+  height: 2rem;
+  line-height: 2rem;
+  color: #EE6E73;
+}
+
+.template .template-folder .folder i{
+  font-size: 1.5rem;
+  margin-right: 5px;
+}
+
+.template .template-folder .files {
+  margin-left: 10px;
+}
+
+.template .template-folder .files li{
+  cursor: pointer;
+  color: #666;
+}
+
+.template .template-folder .files li.active{
+  color: #D84D53;
+}
+
+.template .template-folder .files li i{
+  font-size: 1rem;
+  margin-right: 5px;
+}
+
+.template .tip {
+  display: none;
+  color: #176D65;
 }

@@ -17,6 +17,9 @@ export const REQUEST_TEMPLATE = 'requestTemplate';
 export const REQUEST_TEMPLATES = 'requestTemplates';
 export const ADD_TEMPLATE = 'addTemplate';
 export const UPDATE_TEMPLATE = 'updateTemplate';
+export const TEMPLATE_CONTENT = 'templateContent';
 
 export const ADD_PROJECT = 'addProject';
 export const REQUEST_APPS = 'requestApps';
+
+export const UPDATE_PROJECT = 'updateProject';

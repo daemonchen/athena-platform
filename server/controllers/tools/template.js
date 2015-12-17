@@ -11,7 +11,10 @@ var crypto = require('crypto');
 exports.index = function(req, res) {
   TemplateHelper.findAll().then(function(templates) {
     var ret = {
-      items: [],
+      items: [{
+        _id: '0000',
+        name: '默认模板'
+      }],
       version: 0
     };
     var signal = null;
@@ -36,7 +39,6 @@ exports.index = function(req, res) {
         ret.version = md5.digest('hex');
       }
     }
-    console.log(ret);
     handler.send(res, code.SUCCESS, ret);
   }).catch(function(err) {
     handler.handleError(res, code.FAILURE, err);

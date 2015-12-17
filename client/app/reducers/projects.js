@@ -1,4 +1,4 @@
-import {REQUEST_PROJECTS, REQUEST_PROJECT, SEARCH_START, SEARCH_END} from '../constants/ActionTypes';
+import {REQUEST_PROJECTS, REQUEST_PROJECT, SEARCH_START, SEARCH_END, UPDATE_PROJECT} from '../constants/ActionTypes';
 
 export default function projects(state = {
   projects: [],
@@ -24,6 +24,10 @@ export default function projects(state = {
     return Object.assign({}, state, {
       isFetching: action.isFetching,
       result: action.result
+    });
+  case UPDATE_PROJECT:
+    return Object.assign({}, state, {
+      project: action.project
     });
   default:
     return state;

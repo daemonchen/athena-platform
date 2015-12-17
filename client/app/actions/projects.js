@@ -1,5 +1,5 @@
 import fetchData from '../utils/fetchData';
-import {REQUEST_PROJECTS, REQUEST_PROJECT, SEARCH_START, SEARCH_END} from '../constants/ActionTypes';
+import {REQUEST_PROJECTS, REQUEST_PROJECT, SEARCH_START, SEARCH_END, UPDATE_PROJECT} from '../constants/ActionTypes';
 /**
  * 获取所有项目
  */
@@ -63,3 +63,30 @@ export function requestSearch(appid, value) {
   }
 }
 
+/**
+ * 更新项目成员
+ */
+function members(project) {
+  return {
+    type: UPDATE_PROJECT,
+    project
+  };
+}
+
+export function requestUpdateMembers(appid, value) {
+  return dispatch => {
+    fetchData(dispatch, '/app/update?appid=' + appid, {
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        members: value
+      })
+    }, function(json) {
+      dispatch(members(json.data));
+    });
+  }
+}

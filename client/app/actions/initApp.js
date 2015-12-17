@@ -22,7 +22,6 @@ export function requestAddPrject(params, redirect) {
       },
       body: JSON.stringify(params)
     }, function(json) {
-      console.log(json);
       dispatch(addProject(redirect));
     });
   };
