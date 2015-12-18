@@ -64,8 +64,11 @@ exports.index = function(req, res) {
 };
 
 exports.download = function(req, res) {
-  zip.addLocalFolder(tempPath);
-  zip.writeZip(zipPath);
+  if (lastVersion === -1) {
+    lastVersion = 0;
+    zip.addLocalFolder(tempPath);
+    zip.writeZip(zipPath);
+  }
 
   res.setHeader('Content-disposition', 'attachment; filename=template.zip');
   res.setHeader('Content-type', 'application/zip, application/x-zip');

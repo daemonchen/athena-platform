@@ -10,7 +10,10 @@ var ModSchema = new Schema({
   //author: {type: Schema.Types.ObjectId, ref: 'User'},
   app: {type: String, ref: 'App'},
   pages: [{type: Schema.Types.ObjectId, ref: 'Page'}],
-  widgets: [{type: Schema.Types.ObjectId, ref: 'Widget'}]
+  widgets: [{type: Schema.Types.ObjectId, ref: 'Widget'}],
+  css_compress: {type: Number},
+  js_compress: {type: Number},
+  img_compress: {type: Number}
 });
 
 ModSchema.plugin(lastMod);

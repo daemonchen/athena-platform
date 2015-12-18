@@ -12,6 +12,13 @@ export default class ModuleItem extends Component {
         <div className="collapsible-body">
           <p>author: {item.author}</p>
           <p>created: {Moment(item.createTime).fromNow()}</p>
+          <p>compressed: {(item.css_compress || 0) + (item.js_compress || 0) + (item.img_compress || 0)} bytes
+          </p>
+          <ul className="mod-compress">
+            <li>css: optimize {item.css_compress || 0} bytes</li>
+            <li>js: optimize {item.js_compress || 0} bytes</li>
+            <li>img: optimize {item.img_compress || 0} bytes</li>
+          </ul>
           {type === 'page' && item.pages && item.pages.length > 0 &&
             <ul className="collapsible pages" data-collapsible="expandable">
               {item.pages.map(page => {
