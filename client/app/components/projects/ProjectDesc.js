@@ -34,10 +34,13 @@ export default class ProjectDesc extends Component {
         <div className="collapsible-header active"><i className="material-icons">apps</i><Link to={`/project/` + project._id}>{project.name}</Link></div>
         <div className="collapsible-body">
           <form onSubmit={this.handleSubmit}>
-            <p>id: {project._id}</p>
-            <p>author: {project.author}</p>
-            <p>created: {Moment(project.createTime).fromNow()}</p>
-            <p>members: <span>{members} </span>
+            {project.preview &&
+              <p>预览：<a href={project.preview} target="_blank"><i className="material-icons widget-preview">remove_red_eye</i></a></p>
+            }
+            <p>标示符: {project._id}</p>
+            <p>创建者: {project.author}</p>
+            <p>创建时间: {Moment(project.createTime).fromNow()}</p>
+            <p>成员: <span>{members} </span>
               {auth.loggedIn() &&
                 <i className="material-icons" onClick={this.handleClick}>edit</i>
               }

@@ -17,7 +17,22 @@ exports.desc = function(req, res) {
       return handler.handleError(res, code.FAILURE, proname + ' cannot be found');
     }
 
-    handler.send(res, code.SUCCESS, app);
+    var record = {
+      _id: app._id,
+      name: app.name,
+      author: app.author.name,
+      template: app.template,
+      preview: app.preview,
+      createTime: app.createTime,
+      deploys: app.deploys
+    };
+    if (!app.template) {
+      record.template = {
+        _id: 'default',
+        name: '默认模板'
+      };
+    }
+    handler.send(res, code.SUCCESS, record);
   }).catch(function(err) {
     handler.handleError(res, code.FAILURE, err);
   });

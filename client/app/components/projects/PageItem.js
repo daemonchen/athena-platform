@@ -12,12 +12,12 @@ export default class PageItem extends Component {
         </div>
         <div className="collapsible-body">
           {showModel &&
-            <p><span className="def">module: </span>{page.module.name}</p>
+            <p><span className="def">模块: </span>{page.module.name}</p>
           }
-          <p><span className="def">author: </span>{page.author}</p>
-          <p><span className="def">created: </span>{Moment(page.createTime).fromNow()}</p>
+          <p><span className="def">创建者: </span>{page.author}</p>
+          <p><span className="def">创建时间: </span>{Moment(page.createTime).fromNow()}</p>
           {page.widgets && page.widgets.length > 0 &&
-            <p><span className="def">widgets: </span></p>
+            <p><span className="def">组件: </span></p>
           }
           {page.widgets && page.widgets.length > 0 &&
             <ul className="collection inline">
@@ -27,7 +27,7 @@ export default class PageItem extends Component {
             </ul>
           }
           {page.fragment &&
-            <p><span className="def">fragment: </span>{page.fragment}</p>
+            <p><span className="def">页面片: </span>{page.fragment}</p>
           }
           {page.css && page.css.length > 0 &&
             <p><span className="def">css: </span></p>

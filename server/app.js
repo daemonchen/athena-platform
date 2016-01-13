@@ -46,6 +46,7 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'static', 'unzip')));
 
 routes(app);
 

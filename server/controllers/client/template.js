@@ -1,10 +1,14 @@
 var fs = require('fs');
+var AdmZip = require('adm-zip');
 var path = require('path');
 var ncp = require('ncp').ncp;
 var handler = require('../../utils/handler');
 var code = require('../../utils/code');
 var TemplateHelper = require('../../helpers/template');
-var templatePath = require('../../config/template').path;
+var tempConfig = require('../../config/template');
+var templatePath = tempConfig.path;
+var zipPath = path.join(tempConfig.zip, 'template.zip');
+var zip = new AdmZip();
 
 exports.add = function(req, res) {
   var templateName = req.body.templateName;
@@ -39,7 +43,11 @@ exports.add = function(req, res) {
 
       savePath = path.join(tempPath, savePath);
       //覆盖上传的文件
-      fs.writeFile(savePath, content, 'utf-8');
+      fs.writeFile(savePath, content, 'utf-8', function(err) {
+        //压缩模板文件
+        zipTemplate();
+      });
+
       handler.send(res, code.SUCCESS, template);
     });
   }).catch(function(err) {
@@ -100,6 +108,21 @@ exports.update = function(req, res) {
     return handler.handleError(res, code.FAILURE, 'template name cannot be empty');
   }
 
+  if (templateId === 'default') {
+    var tempPath = path.join(templatePath, 'default');
+    var savePath = getSaveDir(file);
+
+    fs.writeFile(path.join(tempPath, savePath), content, 'utf-8', function(err) {
+      //压缩模板文件
+      zipTemplate();
+    });
+    handler.send(res, code.SUCCESS, {
+      _id: 'default',
+      name: '默认模板'
+    });
+    return;
+  }
+
   TemplateHelper.findOne({_id: templateId}).then(function(template){
     template.name = templateName;
     template.save();
@@ -107,7 +130,11 @@ exports.update = function(req, res) {
     var tempPath = path.join(templatePath, '' + template._id);
     var savePath = getSaveDir(file);
 
-    fs.writeFile(path.join(tempPath, savePath), content, 'utf-8');
+    fs.writeFile(path.join(tempPath, savePath), content, 'utf-8', function(err) {
+      //压缩模板文件
+      zipTemplate();
+    });
+
     handler.send(res, code.SUCCESS, template);
   }).catch(function(err) {
     return handler.handleError(res, code.FAILURE, err);
@@ -116,6 +143,9 @@ exports.update = function(req, res) {
 
 exports.index = function(req, res) {
   TemplateHelper.findAll().then(function(templates) {
+    //if (Array.isArray(templates) && req.query.getDefault) {
+      templates.unshift({_id: 'default', name: '默认模板'});
+    //}
     handler.send(res, code.SUCCESS, templates);
   }).catch(function(err) {
     handler.handleError(res, code.FAILURE, err);
@@ -125,6 +155,14 @@ exports.index = function(req, res) {
 exports.get = function(req, res) {
   var templateId = req.query.templateId;
   var ret = {};
+
+  if (templateId === 'default') {
+    handler.send(res, code.SUCCESS, {
+      _id: 'default',
+      name: '默认模板'
+    });
+    return;
+  };
 
   TemplateHelper.findOne({
     _id: templateId
@@ -137,3 +175,12 @@ exports.get = function(req, res) {
     handler.handleError(res, code.FAILURE, err);
   });
 };
+
+function zipTemplate() {
+  try {
+    zip.addLocalFolder(templatePath);
+    zip.writeZip(zipPath);
+  } catch(e) {
+    console.log(e);
+  }
+}

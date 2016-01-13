@@ -11,7 +11,8 @@ var WidgetSchema = new Schema({
   //author: {type: Schema.Types.ObjectId, ref: 'User'},
   app: {type: String, ref: 'App'},
   module: {type: String, ref: 'Mod'},
-  loadedBy: [{type: Schema.Types.ObjectId, ref: 'Page'}]
+  loadedBy: [{type: Schema.Types.ObjectId, ref: 'Page'}],
+  preview: {type: String, default: ''}
 });
 
 WidgetSchema.plugin(lastMod);

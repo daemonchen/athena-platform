@@ -8,12 +8,12 @@ export default class CssItem extends Component {
       <li>
         <div className="collapsible-header"><i className="material-icons">style</i>{css.name}</div>
         <div className="collapsible-body">
-          <p><span className="def">module: </span>{css.module.name}</p>
+          <p><span className="def">模块: </span>{css.module.name}</p>
           {css.revision &&
-            <p><span className="def">revision: </span>{css.revision}</p>
+            <p><span className="def">线上版本: </span>{css.revision}</p>
           }
           {css.loadedBy && css.loadedBy.length >= 0 &&
-            <p><span className="def">loadedBy: </span>{css.loadedBy.length} times</p>
+            <p><span className="def">被引用: </span>{css.loadedBy.length} 次</p>
           }
           {css.loadedBy && css.loadedBy.length > 0 &&
             <ul className="collection inline">
@@ -23,7 +23,7 @@ export default class CssItem extends Component {
             </ul>
           }
           {css.images && css.images.length > 0 &&
-            <p><span className="def">images: </span></p>
+            <p><span className="def">引用了图片: </span></p>
           }
           {css.images && css.images.length > 0 &&
             <ul className="collection inline">

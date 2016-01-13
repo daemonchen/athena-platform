@@ -1,5 +1,6 @@
 body {
-  font-family: monospace, "Source Sans Pro", Helvetica, "Microsoft Yahei", sans-serif;
+  font-family: "Source Sans Pro", Helvetica, "Microsoft Yahei", sans-serif;
+  /*font-family: "Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3", sans-serif;*/
 }
 
 .error {
@@ -13,7 +14,7 @@ body {
 .header .nav {
   height: 50px;
   line-height: 50px;
-  /*background-color: #ef3b42;*/
+  background-color: #ef3b42;
 }
 
 .header .nav .nav-wrapper {
@@ -49,6 +50,8 @@ body {
 .header nav ul a.active {
   /*background-color: rgba(0,0,0,.1);*/
   background-color: #D84D53;
+  color: #fff;
+  background-color: #cc3238;
 }
 
 .header .dropdown-button {
@@ -437,9 +440,19 @@ body {
   color: #999;
 }
 
-.initapps p .prerelation {
+.initapps p .def.preview{
   display: block;
+}
+
+.initapps p .prerelation {
+  display: inline-block;
+  width: 50%;
   padding-left: .5rem;
+  overflow: auto;
+}
+
+.initapps p .prerelation .val{
+  color: #333;
 }
 
 .appdesc .members {
@@ -489,4 +502,9 @@ body {
 .mod-compress {
   padding: 0 2.8rem .5rem;
   color: #777;
+}
+
+.widget-preview {
+  font-size: 18px;
+  color: #EE6E73;
 }

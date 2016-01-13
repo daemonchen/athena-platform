@@ -1,6 +1,6 @@
 function send(res, rn, data, msg) {
   res.status(200).json({
-    rn: rn,
+    no: rn,
     data: data,
     msg: msg
   })

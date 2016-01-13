@@ -11,6 +11,7 @@ var InitAppSchema = new Schema({
   author: {type: Schema.Types.ObjectId, ref: 'User'},
   template: {type: Schema.Types.ObjectId, ref: 'Template'},
   preview: Object,
+  deploys: Object,
   initstatus: {type: Boolean, default: false}
 });
 

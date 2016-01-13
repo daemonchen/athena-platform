@@ -14,7 +14,7 @@ exports.create = function(params) {
 
 exports.findOne = function(params) {
   return new Promise(function(resolve, reject) {
-    Widget.findOne(params).exec(function(err, widget) {
+    Widget.findOne(params).populate('module').exec(function(err, widget) {
       if (err) {
         reject(err);
       }

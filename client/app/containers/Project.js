@@ -81,7 +81,7 @@ class Project extends Component {
           <div className="result">
             <div className="title">
               <i className="material-icons left">filter_list</i>
-              <a href="javascript:void(0)">Result</a>
+              <a href="javascript:void(0)">查询结果</a>
               <i className="material-icons right close" onClick={this.hideResult}>close</i>
             </div>
             <div className="result-content">
@@ -105,8 +105,8 @@ class Project extends Component {
         <div className="row menu">
           <div className="col s12">
             <ul className="tabs z-depth-1">
-              <li className="tab col"><a href="#pages"><i className="material-icons">pages</i> Pages</a></li>
-              <li className="tab col"><a href="#widgets"><i className="material-icons">widgets</i> Widgets</a></li>
+              <li className="tab col"><a href="#pages"><i className="material-icons">pages</i> 页面</a></li>
+              <li className="tab col"><a href="#widgets"><i className="material-icons">widgets</i> 组件</a></li>
             </ul>
           </div>
         </div>

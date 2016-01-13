@@ -9,7 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "history": "^1.13.1",
+    "history": "1.13.1",
     "isomorphic-fetch": "^2.2.0",
     "jquery": "^2.1.4",
     "md5": "^2.0.0",

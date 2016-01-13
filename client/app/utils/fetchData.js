@@ -19,7 +19,7 @@ export default function fetchData(dispatch, uri, httpHeaders, successCallback) {
   let headers = type(httpHeaders) === 'object' ? httpHeaders : null;
 
   fetch(REQUEST_URI + uri, headers).then(response => response.json()).then(json => {
-    if (json.rn !== 0) {
+    if (json.no !== 0) {
       dispatch({
         type: ERROR_MESSAGE,
         error: json.msg

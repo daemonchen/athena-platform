@@ -37,9 +37,9 @@ function templates(templates) {
   };
 }
 
-export function requestTemplates() {
+export function requestTemplates(getDefault) {
   return dispatch => {
-    fetchData(dispatch, '/templates', function(json) {
+    fetchData(dispatch, '/templates' + (getDefault ? '?getDefault=true' : ''), function(json) {
       dispatch(templates(json.data));
     });
   }

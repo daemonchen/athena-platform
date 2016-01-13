@@ -8,10 +8,10 @@ export default class FragmentItem extends Component {
       <li>
         <div className="collapsible-header"><i className="material-icons">filter_frames</i>{fragment.fragment}</div>
         <div className="collapsible-body">
-          <p><span className="def">page: </span>{fragment.name}</p>
-          <p><span className="def">module: </span>{fragment.module.name}</p>
-          <p><span className="def">author: </span>{fragment.author}</p>
-          <p><span className="def">created: </span>{Moment(fragment.createTime).fromNow()}</p>
+          <p><span className="def">页面: </span>{fragment.name}</p>
+          <p><span className="def">模块: </span>{fragment.module.name}</p>
+          <p><span className="def">创建者: </span>{fragment.author}</p>
+          <p><span className="def">创建时间: </span>{Moment(fragment.createTime).fromNow()}</p>
         </div>
       </li>
     );

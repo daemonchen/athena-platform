@@ -16,6 +16,7 @@ var parseIncludeTask = require('./tasks/upload_parse_include');
 exports.index = function(req, res) {
   var appId = req.body.appId;
   var moduleId = req.body.moduleId;
+  var previewAddr = req.body.preview || '';
   var fileSource = path.join(uploadConfig.path, 'source', req.file.filename);
   var fileDes = path.join(uploadConfig.path, 'unzip', appId, req.file.originalname.replace('.zip', ''));
   var map = null;
@@ -23,6 +24,11 @@ exports.index = function(req, res) {
   var app = null;
   var mod = null;
   var gb = null;
+
+  //检查appId
+  if (!appId) {
+    return handler.handleError(res, code.FAILURE, 'appid caonnot be found');
+  }
 
   //检查文件是否存在
   fs.exists(fileSource, function(exists) {
@@ -32,7 +38,7 @@ exports.index = function(req, res) {
       //解压缩
       unzipTask(fileSource, fileDes).then(function(zip) {
         //解析文件
-        return parseFileTask(fileDes);
+        return parseFileTask(fileDes, appId);
       }).then(function(parseResult) {
         map = parseResult[0];
         modInfo = parseResult[1];
@@ -43,6 +49,9 @@ exports.index = function(req, res) {
         app = ret[0];
         mod = ret[1];
         gb = ret[2];
+
+        //更新preview
+        app.preview = previewAddr;
 
         //解析dependencies
         //如果是gb模块，只需要解析rev

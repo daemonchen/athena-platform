@@ -6,18 +6,14 @@ var InitAppHelper = require('../../helpers/initApp');
 exports.add = function(req, res) {
   var proname = req.body.pro_name;
   var template = req.body.template;
-  var host = req.body.host;
-  var port = req.body.port;
-  var user = req.body.user;
-  var pass = req.body.pass;
-
-  AppHelper.findOne({name: proname}, true).then(function(app) {
+  var preview = req.body.preview;
+  var deploys = req.body.deploys;
 
   if (!req.isAuthenticated()) {
     return handler.handleError(res, code.NO_LOGIN, 'user need login');
   }
 
-
+  AppHelper.findOne({name: proname}, true).then(function(app) {
     if (app) {
       return handler.handleError(res, code.FAILURE, app.name + ' was created');
     }
@@ -25,17 +21,14 @@ exports.add = function(req, res) {
     return InitAppHelper.create({
       name: proname,
       author: req.user._id,
-      template: template,
-      preview: {
-        host: host,
-        port: port,
-        user: user,
-        pass: pass
-      }
+      template: template !== 'default' && template || null,
+      preview: preview,
+      deploys: deploys
     });
   }).then(function(app) {
     handler.send(res, code.SUCCESS, app);
   }).catch(function(err) {
+    console.log(err);
     handler.handleError(res, code.FAILURE, err);
   });
 };

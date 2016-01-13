@@ -8,7 +8,7 @@ export default class Breadcrumbs extends Component {
     return(
       <div className="breadcrumbs">
         <div className="col s12">
-          <Link to={`/templates`} className="breadcrumb">Templates</Link>
+          <Link to={`/templates`} className="breadcrumb">模板</Link>
           <Link to={`/template/${templateId}`} className="breadcrumb">{templateName}</Link>
         </div>
       </div>

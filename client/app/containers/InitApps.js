@@ -29,7 +29,7 @@ class InitApps extends Component {
       <div>
       {children ||
         <div>
-           <Link to={`/project_add`} className="waves-effect waves-light btn"><i className="material-icons left">add_circle_outline</i>New Project</Link>
+           <Link to={`/project_add`} className="waves-effect waves-light btn"><i className="material-icons left">add_circle_outline</i>新建项目</Link>
            <ul className="collapsible initapps" data-collapsible="expandable">
              {apps.map(app => {
                return <AppItem key={app._id} app={app}/>;

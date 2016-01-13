@@ -12,6 +12,7 @@ var AppSchema = new Schema({
   author: String, //暂时没有用户模块
   //author: {type: Schema.Types.ObjectId, ref: 'User'},
   modules: [{type: String, ref: 'Mod'}],
+  preview: {type: String, default: ''},
   template: {type: Schema.Types.ObjectId, ref: 'Template'},
   members: [{type: String}]
 });

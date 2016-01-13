@@ -38,27 +38,27 @@ class Register extends Component {
       <div className="row register">
         <form className="col s12" onSubmit={this.handleSubmit}>
           <div className="row">
-            <h4>Welcome to Register New Account</h4>
+            <h4>账号注册</h4>
           </div>
           <div className="row">
             <div className="input-field col s12">
               <i className="material-icons prefix">mail outline</i>
               <input id="email" type="email" className="validate" ref="email" required />
-              <label htmlFor="email">Your Email</label>
+              <label htmlFor="email">邮箱</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
               <i className="material-icons prefix">account_circle</i>
               <input id="username" type="text" className="validate" ref="username" required />
-              <label htmlFor="username">Your Name</label>
+              <label htmlFor="username">用户名</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
               <i className="material-icons prefix">lock outline</i>
               <input id="password" type={this.state.eye ? 'text' : 'password'} ref="pass" className="validate" required/>
-              <label htmlFor="password">Your Password</label>
+              <label htmlFor="password">密码</label>
               <i className={'material-icons prefix icon-eye' + (this.state.eye ? ' active-eye' : '')} onClick={this.changeEye}>remove_red_eye</i>
             </div>
           </div>
@@ -66,7 +66,7 @@ class Register extends Component {
             <div className="error">{this.props.errorMessage}</div>
           </div>
           <div className="row">
-            <button className="btn waves-effect waves-light" type="submit">Sign Up
+            <button className="btn waves-effect waves-light" type="submit">注册
               <i className="material-icons right">send</i>
             </button>
           </div>

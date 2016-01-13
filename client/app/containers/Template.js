@@ -56,6 +56,9 @@ class Template extends Component {
     if (templateId) {
       if (template) {
         this.refs.templateName.value = template.name;
+        if (!auth.loggedIn() || templateId === 'default') {
+          this.refs.templateName.disabled = true;
+        }
       }
     }
 
@@ -65,6 +68,9 @@ class Template extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let templateName = this.refs.templateName.value;
+    if (!auth.loggedIn()) {
+      this.refs.templateName.disabled = true;
+    }
     if (templateName === '') {
       return false;
     }
@@ -115,6 +121,9 @@ class Template extends Component {
       useSoftTabs: true
     });
     this.editor.$blockScrolling = Infinity;
+    if (!auth.loggedIn()) {
+      this.editor.setReadOnly(true);
+    }
     this.editor.setValue(content, -1);
   }
 
@@ -169,7 +178,7 @@ class Template extends Component {
           </div>
         {auth.loggedIn() &&
           <div className="input-field col s12">
-            <button onClick={this.handleSubmit} className="waves-effect waves-light btn">Save</button><span ref="tip" className="tip"> 更新成功</span>
+            <button onClick={this.handleSubmit} className="waves-effect waves-light btn">保存</button><span ref="tip" className="tip"> 更新成功</span>
           </div>
         }
         </div>

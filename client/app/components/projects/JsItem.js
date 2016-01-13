@@ -8,12 +8,12 @@ export default class JsItem extends Component {
       <li>
         <div className="collapsible-header"><i className="material-icons">toys</i>{js.name}</div>
         <div className="collapsible-body">
-          <p><span className="def">module: </span>{js.module.name}</p>
+          <p><span className="def">模块: </span>{js.module.name}</p>
           {js.revision &&
-            <p><span className="def">revision: </span>{js.revision}</p>
+            <p><span className="def">线上版本: </span>{js.revision}</p>
           }
           {js.loadedBy && js.loadedBy.length >= 0 &&
-            <p><span className="def">loadedBy: </span>{js.loadedBy.length} times</p>
+            <p><span className="def">被引用了: </span>{js.loadedBy.length} 次</p>
           }
           {js.loadedBy && js.loadedBy.length > 0 &&
             <ul className="collection inline">

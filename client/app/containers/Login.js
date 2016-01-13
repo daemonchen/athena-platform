@@ -26,27 +26,27 @@ class Login extends Component {
       <div className="row login">
         <form className="col s12" onSubmit={this.handleSubmit}>
           <div className="row">
-            <h4>Login to Your Account</h4>
+            <h4>账号登录</h4>
           </div>
           <div className="row">
             <div className="input-field col s12">
               <i className="material-icons prefix">mail outline</i>
               <input id="email" type="email" ref="email" className="validate" required/>
-              <label htmlFor="email">Your Email</label>
+              <label htmlFor="email">邮箱</label>
             </div>
           </div>
           <div className="row">
             <div className="input-field col s12">
               <i className="material-icons prefix">lock outline</i>
               <input id="password" type="password" ref="pass" className="validate" required/>
-              <label htmlFor="password">Your Password</label>
+              <label htmlFor="password">密码</label>
             </div>
           </div>
           <div className="row">
             <div className="error">{this.props.errorMessage}</div>
           </div>
           <div className="row">
-            <button className="btn waves-effect waves-light" type="submit">Login
+            <button className="btn waves-effect waves-light" type="submit">登录
               <i className="material-icons right">send</i>
             </button>
           </div>
