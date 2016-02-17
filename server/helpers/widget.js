@@ -62,3 +62,39 @@ exports.findWithSub = function(params, modName, appName) {
     });
   });
 };
+
+exports.remove = function(params) {
+  return new Promise(function(resolve, reject) {
+    Widget.remove(params, function(err) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(true);
+    });
+  });
+}
+
+exports.find = function(params) {
+  return new Promise(function(resolve, reject) {
+    Widget.find(params).exec(function(err, widgets) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(widgets);
+    })
+  });
+}
+
+exports.count = function(params) {
+  return new Promise(function(resolve, reject) {
+    Widget.count(params, function(err, sum) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(sum);
+    });
+  });
+}

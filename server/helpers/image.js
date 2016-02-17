@@ -48,4 +48,28 @@ exports.findWithSub = function(params) {
       resolve(images);
     });
   });
-}
+};
+
+exports.find = function(params) {
+  return new Promise(function(resolve, reject) {
+    Image.find(params).exec(function(err, images) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(images);
+    });
+  });
+};
+
+exports.remove = function(params) {
+  return new Promise(function(resolve, reject) {
+    Image.remove(params, function(err) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(true);
+    });
+  });
+};

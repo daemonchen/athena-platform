@@ -23,3 +23,5 @@ export const ADD_PROJECT = 'addProject';
 export const REQUEST_APPS = 'requestApps';
 
 export const UPDATE_PROJECT = 'updateProject';
+
+export const ANALYSIS = 'analysis';

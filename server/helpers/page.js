@@ -84,3 +84,28 @@ exports.findWithAllSub = function(params, modName, appName) {
     });
   });
 };
+
+exports.remove = function(params) {
+  return new Promise(function(resolve, reject) {
+    Page.remove(params, function(err) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(true);
+    });
+  });
+};
+
+exports.count = function(params) {
+  return new Promise(function(resolve, reject) {
+    Page.count(params, function(err, sum) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(sum);
+    });
+  });
+}
+

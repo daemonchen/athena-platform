@@ -77,7 +77,6 @@ module.exports = function(fileDes, appId) {
 
         //拼凑组件页面
 
-
       });
 
       var template = '<!doctype html><html lang="zh-CN">' +

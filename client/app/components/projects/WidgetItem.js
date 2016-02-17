@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Moment from 'moment';
+import {ROOT} from '../../constants/Config';
 
 export default class WidgetItem extends Component {
   render() {
@@ -9,7 +10,7 @@ export default class WidgetItem extends Component {
         <div className="collapsible-header"><i className="material-icons">widgets</i>{widget.name}</div>
         <div className="collapsible-body">
           {widget.preview && widget.preview !== '' &&
-            <p><span className="def">预览: </span><a href={widget.preview} target="_blank"><i className="material-icons widget-preview">remove_red_eye</i></a></p>
+            <p><span className="def">预览: </span><a href={ROOT + widget.preview} target="_blank"><i className="material-icons widget-preview">remove_red_eye</i></a></p>
           }
           {showModel &&
             <p><span className="def">模块: </span>{widget.module.name}</p>

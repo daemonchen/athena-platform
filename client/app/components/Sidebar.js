@@ -34,7 +34,11 @@ export default class Sidebar extends Component {
   }
 
   render() {
-    const {url, appid, type} = this.props;
+    const {url, appid, type, author} = this.props;
+    let params = {};
+    if (author && author !== '') {
+      params.author = author;
+    }
     return (
       <div className="sidebar">
         <div className="row search">
@@ -45,7 +49,7 @@ export default class Sidebar extends Component {
         </div>
         <div className="collection">
           {this.state.projects.map(project => {
-            return <Link to={url + (type === 'app' ? '' : '?appid=') + project._id} key={project._id} className={'collection-item' + (appid === project._id ? ' active' : '')}>{project.name}</Link>;
+            return <Link to={url + (type === 'app' ? '' : '?appid=') + project._id} query={params} key={project._id} className={'collection-item' + (appid === project._id ? ' active' : '')}>{project.name}</Link>;
           })}
         </div>
       </div>

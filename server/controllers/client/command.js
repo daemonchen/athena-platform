@@ -9,6 +9,7 @@ exports.index = function(req, res) {
   var page = req.query.page > 1 ? req.query.page - 1 : 0;
   var length = req.query.length ? req.query.length : 50;
   var appid = req.query.appid ? req.query.appid : '';
+  var author = req.query.author ? req.query.author : '';
 
   if (cmd && cmdArr.indexOf(cmd) !== -1) {
     params['cmd'] = cmd;
@@ -16,6 +17,10 @@ exports.index = function(req, res) {
 
   if (appid) {
     params['app'] = {_id: appid};
+  }
+
+  if (author) {
+    params['author'] = author;
   }
 
   Promise.all([CommandHelper.all(params, page, length), CommandHelper.count(params)]).then(function(result) {

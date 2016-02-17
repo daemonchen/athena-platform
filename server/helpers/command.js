@@ -52,3 +52,18 @@ exports.count = function(params) {
     });
   });
 }
+
+/**
+ * 删除命令记录
+ */
+exports.remove = function(params) {
+  return new Promise(function(resolve, reject) {
+    Command.remove(params, function(err) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(true);
+    });
+  });
+}

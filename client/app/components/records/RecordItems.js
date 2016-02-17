@@ -8,7 +8,7 @@ export default class RecordItems extends Component {
       <div>
         {records && records.length > 0 && records.map(record => {
           return (
-            <RecordItem record={record} key={record._id} />
+            <RecordItem record={record} url={this.props.url} key={record._id} />
           );
         })}
         {records && records.length === 0 &&

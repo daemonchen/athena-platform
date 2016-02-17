@@ -37,7 +37,13 @@ module.exports = function(params, res) {
   }).then(function(command) {
     handler.send(res, code.SUCCESS, command);
   }).catch(function(err) {
-    handler.handleError(res, code.FAILURE, err);
+    console.log(err);
+    var msg = '服务器连接失败，请稍后重试';
+    if (err && /duplicate/ig.test(err.errmsg)) {
+      msg = '服务器已存在同名的项目，麻烦改个名字';
+    }
+
+    handler.handleError(res, code.FAILURE, msg);
   });
 };
 

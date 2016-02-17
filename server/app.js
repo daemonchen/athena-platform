@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
+var engine = require('ejs-locals');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');

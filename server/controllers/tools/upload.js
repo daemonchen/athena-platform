@@ -16,6 +16,7 @@ var parseIncludeTask = require('./tasks/upload_parse_include');
 exports.index = function(req, res) {
   var appId = req.body.appId;
   var moduleId = req.body.moduleId;
+  var author = req.body.author;
   var previewAddr = req.body.preview || '';
   var fileSource = path.join(uploadConfig.path, 'source', req.file.filename);
   var fileDes = path.join(uploadConfig.path, 'unzip', appId, req.file.originalname.replace('.zip', ''));
@@ -52,12 +53,13 @@ exports.index = function(req, res) {
 
         //更新preview
         app.preview = previewAddr;
+        app.save();
 
         //解析dependencies
         //如果是gb模块，只需要解析rev
-        if (modInfo.module === 'gb') {
-          return true;
-        }
+/*        if (modInfo.module === 'gb') {*/
+          //return true;
+        /*}*/
         return parseDependenciesTask(moduleId, map.dependency);
       }).then(function(dependencies) {
         //解析线上版本对应关系rev
@@ -65,15 +67,16 @@ exports.index = function(req, res) {
       }).then(function(rev) {
         //解析页面关系
         //gb模块无需解析include
-        if (modInfo.module === 'gb') {
-          return true;
-        }
+/*        if (modInfo.module === 'gb') {*/
+          //return true;
+        /*}*/
         return parseIncludeTask(mod, app, gb, map.include);
       }).then(function(inlcudes) {
         console.log('parse success');
       }).catch(function(err) {
         console.log(err);
       });
+
     } else {
       handler.handleError(res, code.FAILURE, 'file is not exists');
     }

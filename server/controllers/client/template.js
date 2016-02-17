@@ -25,7 +25,8 @@ exports.add = function(req, res) {
 
   TemplateHelper.create({
     name: templateName,
-    author: req.user._id
+    author: req.user._id,
+    modify: [req.user._id]
   }).then(function(template) {
     //复制一份默认的
     var tempPath = path.join(templatePath, '' + template._id);
@@ -120,11 +121,16 @@ exports.update = function(req, res) {
       _id: 'default',
       name: '默认模板'
     });
+
     return;
   }
 
   TemplateHelper.findOne({_id: templateId}).then(function(template){
     template.name = templateName;
+    template.modify = template.modify || [req.user._id];
+    if (template.modify[template.modify.length - 1] + '' !== req.user._id + '') {
+      template.modify.push(req.user._id);
+    }
     template.save();
 
     var tempPath = path.join(templatePath, '' + template._id);

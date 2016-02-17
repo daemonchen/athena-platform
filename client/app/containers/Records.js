@@ -20,11 +20,11 @@ class Records extends Component {
     const {query} = this.props.location;
     const {params, location} = nextProps;
     const {type} = nextProps.params;
-    const {page, appid} = location.query;
+    const {page, appid, author} = location.query;
 
-    if (type !== this.props.params.type || page !== query.page || appid !== query.appid) {
+    if (type !== this.props.params.type || page !== query.page || appid !== query.appid || author !== query.author) {
       const {dispatch} = this.props;
-      dispatch(requestRecords(type, page, appid));
+      dispatch(requestRecords(type, page, appid, author));
     }
   }
 
@@ -32,11 +32,19 @@ class Records extends Component {
     const {params, location} = this.props;
     let root = params.type === undefined;
     let url = '/records/' + (params.type ? params.type : 'all') + (location.query.appid ? '?appid=' + location.query.appid : '');
+    let userUrl = url;
+    if (location.query.author && location.query.author !== '') {
+      if (url.indexOf('?') === -1) {
+        url += '?author=' + location.query.author;
+      } else {
+        url += '&author=' + location.query.author;
+      }
+    }
     return (
       <div className="row">
         <div className="col s9">
-          <RecordNav appid={location.query.appid} root={root}/>
-          <RecordItems records={this.props.records}/>
+          <RecordNav appid={location.query.appid} author={location.query.author} root={root}/>
+          <RecordItems records={this.props.records} url={userUrl}/>
           {this.props.records && this.props.records.length > 0 &&
             <Pagination url={url} pagination={this.props.pagination}/>
           }

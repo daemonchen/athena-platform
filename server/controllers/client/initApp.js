@@ -2,6 +2,7 @@ var handler = require('../../utils/handler');
 var code = require('../../utils/code');
 var AppHelper = require('../../helpers/app');
 var InitAppHelper = require('../../helpers/initApp');
+var uuid = require('uuid');
 
 exports.add = function(req, res) {
   var proname = req.body.pro_name;
@@ -19,8 +20,9 @@ exports.add = function(req, res) {
     }
 
     return InitAppHelper.create({
+      _id: uuid.v1(),
       name: proname,
-      author: req.user._id,
+      author: req.user.name,
       template: template !== 'default' && template || null,
       preview: preview,
       deploys: deploys

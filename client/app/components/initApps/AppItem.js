@@ -15,7 +15,6 @@ export default class AppItem extends Component {
       data.push(curr);
     }
 
-    console.log(data);
     return data.map(deploy => {
       return (
         <p key={deploy.name}><span className="def preview">{deploy.name}: </span>
@@ -41,7 +40,7 @@ export default class AppItem extends Component {
       <li>
         <div className="collapsible-header"><i className="material-icons">apps</i>{app.name}</div>
         <div className="collapsible-body">
-          <p><span className="def">创建者: </span>{app.author.name}</p>
+          <p><span className="def">创建者: </span>{app.author}</p>
           <p><span className="def">模板: </span>{app.template && app.template.name || '默认模板'}</p>
           <p><span className="def preview">预览机preview: </span>
             <span className="prerelation def">host: <span className="val">{app.preview.host}</span></span>

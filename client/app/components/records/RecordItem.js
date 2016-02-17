@@ -4,14 +4,14 @@ import Moment from 'moment';
 
 export default class RecordItem extends Component {
   render() {
-    const {record} = this.props;
+    const {record, url} = this.props;
     let item = '';
 
     switch (record.cmd) {
     case 'app':
       item = (
         <div className="detail">
-          <a href="#">{record.author}</a> 创建了项目 <Link to={`/project/${record.app._id}`}>{record.app.name}</Link>
+          <Link to={url} query={{author: record.author}}>{record.author}</Link> 创建了项目 <Link to={`/project/${record.app._id}`}>{record.app.name}</Link>
           <p className="cmd">cmd: <i className="material-icons">apps</i></p>
           <p>appid: {record.app._id}</p>
         </div>
@@ -20,7 +20,7 @@ export default class RecordItem extends Component {
     case 'module':
       item = (
         <div className="detail">
-          <a href="#">{record.author}</a> 在项目 <Link to={`/project/${record.app._id}`}>{record.app.name}</Link> 中添加了模块 <strong>{record.module.name}</strong>
+          <Link to={url} query={{author: record.author}}>{record.author}</Link> 在项目 <Link to={`/project/${record.app._id}`}>{record.app.name}</Link> 中添加了模块 <strong>{record.module.name}</strong>
           <p className="cmd">cmd: <i className="material-icons">view_module</i></p>
           <p>appid: {record.app._id}</p>
         </div>
@@ -29,7 +29,7 @@ export default class RecordItem extends Component {
     case 'page':
       item = (
         <div className="detail">
-          <a href="#">{record.author}</a> 在项目 <Link to={`/project/${record.app._id}`}>{record.app.name}</Link> 的模块 <strong>{record.module.name}</strong> 中添加了页面 <strong>{record.args}</strong>
+          <Link to={url} query={{author: record.author}}>{record.author}</Link> 在项目 <Link to={`/project/${record.app._id}`}>{record.app.name}</Link> 的模块 <strong>{record.module.name}</strong> 中添加了页面 <strong>{record.args}</strong>
           <p className="cmd">cmd: <i className="material-icons">pages</i></p>
           <p>appid: {record.app._id}</p>
         </div>
@@ -38,16 +38,35 @@ export default class RecordItem extends Component {
     case 'widget':
       item = (
         <div className="detail">
-          <a href="#">{record.author}</a> 在项目 <Link to={`/project/${record.app._id}`}>{record.app.name}</Link> 的模块 <strong>{record.module.name}</strong> 中添加了组件 <strong>{record.args}</strong>
+          <Link to={url} query={{author: record.author}}>{record.author}</Link> 在项目 <Link to={`/project/${record.app._id}`}>{record.app.name}</Link> 的模块 <strong>{record.module.name}</strong> 中添加了组件 <strong>{record.args}</strong>
           <p className="cmd">cmd: <i className="material-icons">widgets</i></p>
           <p>appid: {record.app._id}</p>
         </div>
       );
       break;
+    case 'publish':
+      item = (
+        <div className="detail">
+          <Link to={url} query={{author: record.author}}>{record.author}</Link> 发布了项目 <Link to={`/project/${record.app._id}`}>{record.app.name}</Link> 中的模块 <strong>{record.module.name}</strong>
+          <p className="cmd">cmd: <i className="material-icons">publish</i></p>
+          <p>appid: {record.app._id}</p>
+        </div>
+      );
+      break;
+    case 'delete':
+      item = (
+        <div className="detail">
+          <Link to={url} query={{author: record.author}}>{record.author}</Link> 在项目 <Link to={`/project/${record.app._id}`}>{record.app.name}</Link> 的模块中 <strong>{record.module.name}</strong> 删除了 <strong>{record.args}</strong>
+          <p className="cmd">cmd: <i className="material-icons">delete</i></p>
+          <p>appid: {record.app._id}</p>
+        </div>
+      );
+
+      break;
     default:
       item = (
         <div className="detail">
-          <a href="#">{record.author}</a> {record.cmd} <Link to={`/project/${record.app._id}`}>{record.app.name}</Link> {record.module && record.module.name}
+          <Link to={url} query={{author: record.author}}>{record.author}</Link> {record.cmd} <Link to={`/project/${record.app._id}`}>{record.app.name}</Link> {record.module && record.module.name} {record.args && record.args.join(' ')}
           <p className="cmd">cmd: {record.cmd}</p>
           <p>appid: {record.app._id}</p>
         </div>

@@ -44,6 +44,9 @@ export const RouteConfig = {
         onEnter: needLogin
       }]
     }, {
+      path: '/analysis',
+      component: require('../containers/Analysis')
+    }, {
       path: '*',
       component: require('../containers/Records')
     }]

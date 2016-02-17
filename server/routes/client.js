@@ -5,6 +5,8 @@ var command = require('../controllers/client/command');
 var app = require('../controllers/client/app');
 var template = require('../controllers/client/template');
 var initApp = require('../controllers/client/initApp');
+var widgets = require('../controllers/client/widgets');
+var analysis = require('../controllers/client/analysis');
 
 router.get('/commands', command.index);
 router.get('/apps', app.index);
@@ -22,5 +24,8 @@ router.post('/template/update', template.update);
 router.post('/app/update', app.update);
 
 router.post('/initApp/add', initApp.add);
+
+router.get('/widgets', widgets.index);
+router.get('/analysis', analysis.index);
 
 module.exports = router;

@@ -6,9 +6,11 @@ var Schema = mongoose.Schema;
 var lastMod = require('../utils/mongoose-lastMod');
 
 var InitAppSchema = new Schema({
+  _id: String,
   name: {type: String, unique: true, index: true, require: true},
   createTime: {type: Date, default: Date.now},
-  author: {type: Schema.Types.ObjectId, ref: 'User'},
+  //author: {type: Schema.Types.ObjectId, ref: 'User'},
+  author: String,
   template: {type: Schema.Types.ObjectId, ref: 'Template'},
   preview: Object,
   deploys: Object,

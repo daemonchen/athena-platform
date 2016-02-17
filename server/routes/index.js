@@ -6,6 +6,7 @@
 
 var tools = require('./tools');
 var client = require('./client');
+var admin = require('./admin');
 
 module.exports = function(app) {
   /*
@@ -26,4 +27,5 @@ module.exports = function(app) {
 
   app.use('/api', tools);
   app.use('/client', client);
+  app.use('/admin', admin);
 };

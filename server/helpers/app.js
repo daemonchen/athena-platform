@@ -114,3 +114,15 @@ exports.findOneWithDesc = function(params) {
     });
   });
 }
+
+exports.count = function(params) {
+  return new Promise(function(resolve, reject) {
+    App.count(params, function(err, sum) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(sum);
+    });
+  });
+}

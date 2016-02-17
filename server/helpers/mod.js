@@ -42,3 +42,42 @@ exports.findOne = function(params) {
     })
   });
 };
+
+/**
+ * 删除模块
+ */
+exports.remove = function(params) {
+  return new Promise(function(resolve, reject) {
+    Mod.remove(params, function(err) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(true);
+    });
+  });
+};
+
+exports.findAll = function(params) {
+  return new Promise(function(resolve, reject) {
+    Mod.find(params).exec(function(err, mods) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(mods);
+    });
+  });
+};
+
+exports.count = function(params) {
+  return new Promise(function(resolve, reject) {
+    Mod.count(params, function(err, sum) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(sum);
+    });
+  });
+}

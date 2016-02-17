@@ -6,7 +6,8 @@ var TemplateSchema = new Schema({
   name: {type: String, unique: true},
   //author: String, //暂时没有用户模块
   author: {type: Schema.Types.ObjectId, ref: 'User'},
-  createTime: {type: String, default: Date.now}
+  createTime: {type: String, default: Date.now},
+  modify: [{type: Schema.Types.ObjectId, ref: 'User'}]
 });
 
 TemplateSchema.plugin(lastMod);

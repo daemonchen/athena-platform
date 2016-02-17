@@ -58,4 +58,28 @@ exports.findWithSub = function(params, modName, appName) {
       resolve(jses);
     });
   });
-}
+};
+
+exports.find = function(params) {
+  return new Promise(function(resolve, reject) {
+    Js.find(params).exec(function(err, js) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(js);
+    });
+  });
+};
+
+exports.remove = function(params) {
+  return new Promise(function(resolve, reject) {
+    Js.remove(params, function(err) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(true);
+    });
+  });
+};

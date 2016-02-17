@@ -60,3 +60,27 @@ exports.findWithAllSub = function(params, modName, appName) {
     });
   });
 };
+
+exports.find = function(params) {
+  return new Promise(function(resolve, reject) {
+    Css.find(params).exec(function(err, css) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(css);
+    });
+  });
+};
+
+exports.remove = function(params) {
+  return new Promise(function(resolve, reject) {
+    Css.remove(params, function(err) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(true);
+    });
+  });
+};

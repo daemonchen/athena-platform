@@ -7,7 +7,7 @@ exports.create = function(params) {
   return new Promise(function(resolve, reject) {
     InitApp.create(params, function(err, app) {
       if (err) {
-        return reject(err.errmsg);
+        return reject(err);
       }
 
       resolve(app);
@@ -17,7 +17,7 @@ exports.create = function(params) {
 
 exports.findAll = function() {
   return new Promise(function(resolve, reject) {
-    InitApp.find().populate('template author').sort({createTime: -1}).exec(function(err, apps) {
+    InitApp.find().populate('template').sort({createTime: -1}).exec(function(err, apps) {
       if (err) {
         return reject(err);
       }
@@ -29,7 +29,7 @@ exports.findAll = function() {
 
 exports.findOne = function(params) {
   return new Promise(function(resolve, reject) {
-    InitApp.findOne(params).populate('author template').exec(function(err, app) {
+    InitApp.findOne(params).populate('template').exec(function(err, app) {
       if (err) {
         return reject(err);
       }

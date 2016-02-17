@@ -23,12 +23,13 @@ export default class Header extends Component {
               <li><Link to={`/records`} className={'waves-effect waves-light' + (this.props.root ? ' active' : '')} activeClassName="active">记录</Link></li>
               <li><Link to={`/projects`} className="waves-effect waves-light" activeClassName="active">项目</Link></li>
               <li><Link to={`/templates`} className="waves-effect waves-light" activeClassName="active">模板</Link></li>
+              <li><Link to={`/analysis`} className="waves-effect waves-light" activeClassName="active">统计</Link></li>
             </ul>
             <ul className={'right' + (auth.loggedIn() ? '' : ' hide')}>
               <li>
                 <a href="javascript:void(0);" data-activates="menu" className="dropdown-button waves-effect waves-light" activeClassName="active">{auth.getUser()}</a>
                 <ul id="menu" className="dropdown-content">
-                  <li><Link to={`/initapps`}>创建项目</Link></li>
+                  <li><Link to={`/initapps`}>远程项目</Link></li>
                   <li><a href="javascript:void(0)" onClick={this.logout}>登出</a></li>
                 </ul>
               </li>

@@ -20,7 +20,7 @@ exports.desc = function(req, res) {
     var record = {
       _id: app._id,
       name: app.name,
-      author: app.author.name,
+      author: app.author,
       template: app.template,
       preview: app.preview,
       createTime: app.createTime,
@@ -34,6 +34,7 @@ exports.desc = function(req, res) {
     }
     handler.send(res, code.SUCCESS, record);
   }).catch(function(err) {
+    console.log(err);
     handler.handleError(res, code.FAILURE, err);
   });
 };

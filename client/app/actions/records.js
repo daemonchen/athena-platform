@@ -13,9 +13,9 @@ function records(records, pagination) {
   };
 }
 
-export function requestRecords(type = 'all', page = 0, appid = '') {
+export function requestRecords(type = 'all', page = 0, appid = '', author = '') {
   return dispatch => {
-    fetchData(dispatch, '/commands?type=' + type + '&page=' + page + '&appid=' + appid + '&length=' + RECORDS_NUM, function(json) {
+    fetchData(dispatch, '/commands?type=' + type + '&page=' + page + '&appid=' + appid + '&length=' + RECORDS_NUM + '&author=' + author, function(json) {
       const {data} = json;
       dispatch(records(data.commands, data.pagination));
     });
