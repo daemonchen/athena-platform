@@ -1,6 +1,8 @@
 var VersionHelper = require('../../helpers/version');
 var handler = require('../../utils/handler');
 var code = require('../../utils/code');
+var log4js = require('log4js');
+var toolsLog = log4js.getLogger('tools');
 
 exports.index = function(req, res) {
   VersionHelper.findOne().then(function(version) {
@@ -12,7 +14,7 @@ exports.index = function(req, res) {
       v: version.version
     });
   }).catch(function(err) {
-    console.log(err);
+    toolsLog.error('version error: ', err);
     handler.handleError(res, code.FAILURE, err);
   });
 };
@@ -37,7 +39,7 @@ exports.update = function(req, res) {
       v: version.version
     });
   }).catch(function(err) {
-    console.log(err);
+    toolsLog.error('version update: ', err);
     handler.handleError(res, code.FAILURE, err);
   });
 };

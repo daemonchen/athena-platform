@@ -1,6 +1,8 @@
 var code = require('../../utils/code');
 var handler = require('../../utils/handler');
 var CommandHelper = require('../../helpers/command');
+var log4js = require('log4js');
+var clientLog = log4js.getLogger('client');
 
 var cmdArr = ['app', 'module', 'page', 'widget'];
 exports.index = function(req, res) {
@@ -37,6 +39,7 @@ exports.index = function(req, res) {
       pagination: pagination
     });
   }).catch(function(err) {
+    clientLog.error('command: ', err);
     handler.handleError(res, code.FAILURE, '服务器出错');
   });
 };

@@ -9,6 +9,8 @@ var tempConfig = require('../../config/template');
 var templatePath = tempConfig.path;
 var zipPath = path.join(tempConfig.zip, 'template.zip');
 var zip = new AdmZip();
+var log4js = require('log4js');
+var clientLog = log4js.getLogger('client');
 
 exports.add = function(req, res) {
   var templateName = req.body.templateName;
@@ -52,6 +54,7 @@ exports.add = function(req, res) {
       handler.send(res, code.SUCCESS, template);
     });
   }).catch(function(err) {
+    clientLog.error('add template: ', err);
     return handler.handleError(res, code.FAILURE, err);
   });
 };
@@ -122,6 +125,7 @@ exports.update = function(req, res) {
       name: '默认模板'
     });
 
+    clientLog.info('update default template: ', req.user._id, req.user.email, req.user.name);
     return;
   }
 
@@ -142,7 +146,9 @@ exports.update = function(req, res) {
     });
 
     handler.send(res, code.SUCCESS, template);
+    clientLog.info('update ', template.name, template._id, ' : ', req.user._id, req.user.email, req.user.name);
   }).catch(function(err) {
+    clientLog.error('update template: ', err);
     return handler.handleError(res, code.FAILURE, err);
   });
 }
@@ -187,6 +193,6 @@ function zipTemplate() {
     zip.addLocalFolder(templatePath);
     zip.writeZip(zipPath);
   } catch(e) {
-    console.log(e);
+    clientLog.error('template: ', e);
   }
 }

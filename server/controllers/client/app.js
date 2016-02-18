@@ -7,6 +7,8 @@ var searchWidget = require('./tasks/app_search_widget');
 var searchCss = require('./tasks/app_search_css');
 var searchJs = require('./tasks/app_search_js');
 var searchImage = require('./tasks/app_search_image');
+var log4js = require('log4js');
+var clientLog = log4js.getLogger('client');
 
 exports.index = function(req, res) {
   AppHelper.findAll().then(function(apps) {
@@ -110,7 +112,7 @@ exports.search = function(req, res) {
           js: result[5]
         });
       }).catch(function(err) {
-        console.log(err);
+        clientLog.error('app search: ', err);
         handler.handleError(res, code.FAILURE, err);
       });
   }
@@ -139,7 +141,7 @@ exports.update = function(req, res) {
       handler.send(res, code.SUCCESS, app);
     });
   }).catch(function(err) {
-    console.log(err);
+    clientLog.error('app update: ', err);
     handler.handleError(res, code.FAILURE, err);
   });
 }

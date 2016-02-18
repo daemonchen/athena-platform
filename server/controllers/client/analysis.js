@@ -4,6 +4,8 @@ var AppHelper = require('../../helpers/app');
 var ModHelper = require('../../helpers/mod');
 var WidgetHelper = require('../../helpers/widget');
 var PageHelper = require('../../helpers/page');
+var log4js = require('log4js');
+var clientLog = log4js.getLogger('client');
 
 exports.index = function(req, res) {
   /**
@@ -53,7 +55,7 @@ exports.index = function(req, res) {
     ];
     handler.send(res, code.SUCCESS, data);
   }).catch(function(err) {
-    console.log(err);
+    clientLog.error('analysis: ', err);
     handler.handleError(res, code.FAILURE, err);
   })
 };

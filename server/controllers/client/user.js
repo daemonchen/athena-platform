@@ -3,6 +3,8 @@ var code = require('../../utils/code');
 var handler = require('../../utils/handler');
 var cookieConfig = require('../../config/cookie');
 var userHelper = require('../../helpers/user');
+var log4js = require('log4js');
+var clientLog = log4js.getLogger('client');
 
 /**
  * 注册
@@ -30,6 +32,7 @@ exports.register = function(req, res) {
       }
     }
     handler.handleError(res, code.FAILURE, msg);
+    clientLog.error('register: ', err);
   });
 
 };

@@ -6,6 +6,8 @@ var zipPath = path.join(tempConfig.zip, 'template.zip');
 var tempPath = tempConfig.path;
 var TemplateHelper = require('../../helpers/template');
 var md5File = require('md5-file');
+var log4js = require('log4js');
+var toolsLog = log4js.getLogger('tools');
 
 exports.index = function(req, res) {
   TemplateHelper.findAll().then(function(templates) {
@@ -35,6 +37,7 @@ exports.index = function(req, res) {
     })
   }).catch(function(err) {
     handler.handleError(res, code.FAILURE, err);
+    toolsLog.error('template version: ', err);
   });
 };
 

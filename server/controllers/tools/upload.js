@@ -12,6 +12,8 @@ var getAppAndModuleTask = require('./tasks/upload_app_module');
 var parseDependenciesTask = require('./tasks/upload_parse_dependencies');
 var parseRevTask = require('./tasks/upload_parse_rev');
 var parseIncludeTask = require('./tasks/upload_parse_include');
+var log4js = require('log4js');
+var toolsLog = log4js.getLogger('tools');
 
 exports.index = function(req, res) {
   var appId = req.body.appId;
@@ -74,7 +76,7 @@ exports.index = function(req, res) {
       }).then(function(inlcudes) {
         console.log('parse success');
       }).catch(function(err) {
-        console.log(err);
+        toolsLog.error('upload error: ', err, req.body);
       });
 
     } else {

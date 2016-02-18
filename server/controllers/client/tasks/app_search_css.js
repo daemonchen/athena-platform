@@ -1,4 +1,6 @@
 var CssHelper = require('../../../helpers/css');
+var log4js = require('log4js');
+var clientLog = log4js.getLogger('client');
 
 module.exports = function(appid, search) {
   var query = search;

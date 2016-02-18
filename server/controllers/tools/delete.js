@@ -4,6 +4,8 @@ var deletePageTask = require('./tasks/delete_page');
 var deleteWidgetTask = require('./tasks/delete_widget');
 var handler = require('../../utils/handler');
 var code = require('../../utils/code');
+var log4js = require('log4js');
+var toolsLog = log4js.getLogger('tools');
 
 exports.index = function(req, res) {
   var cmd = req.body.cmd;
@@ -13,7 +15,6 @@ exports.index = function(req, res) {
   var widget = req.body.widget;
   var author = req.body.author;
 
-  console.log(req.body);
   switch (cmd) {
     case 'app':
       if (appId) {
@@ -23,7 +24,6 @@ exports.index = function(req, res) {
       }
     break;
     case 'module':
-      console.log(mod);
       if (mod) {
         deleteModTask(mod);
       } else {
@@ -48,5 +48,6 @@ exports.index = function(req, res) {
       break;
   }
 
+  toolsLog.info('delete: ', req.body);
   handler.send(res, code.SUCCESS);
 };

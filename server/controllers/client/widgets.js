@@ -2,6 +2,8 @@ var WidgetHelper = require('../../helpers/widget');
 var ModHelper = require('../../helpers/mod');
 var handler = require('../../utils/handler');
 var code = require('../../utils/code');
+var log4js = require('log4js');
+var clientLog = log4js.getLogger('client');
 
 /**
  * 获取模块中的组件
@@ -19,7 +21,7 @@ exports.index = function(req, res) {
         handler.send(res, code.SUCCESS, data);
       });
     }).catch(function(err) {
-      console.log(err);
+      clientLog.error('widgets: ', err);
       handler.handleError(res, code.FAILURE, 'mod cannot be empty');
     });
   } else {

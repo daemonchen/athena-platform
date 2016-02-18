@@ -9,6 +9,8 @@ var handler = require('../../../utils/handler');
 var AppHelper = require('../../../helpers/app');
 var ModHelper = require('../../../helpers/mod');
 var CommandHelper = require('../../../helpers/command');
+var log4js = require('log4js');
+var toolsLog = log4js.getLogger('tools');
 
 module.exports = function(params, res) {
   var app = null;
@@ -37,7 +39,7 @@ module.exports = function(params, res) {
   }).then(function(command) {
     handler.send(res, code.SUCCESS, command);
   }).catch(function(err) {
-    console.log(err);
+    toolsLog.error('add app: ', err);
     var msg = '服务器连接失败，请稍后重试';
     if (err && /duplicate/ig.test(err.errmsg)) {
       msg = '服务器已存在同名的项目，麻烦改个名字';

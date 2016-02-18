@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var path = require('path');
+var log4js = require('log4js');
 var app = express();
 
 //routes
@@ -18,6 +19,9 @@ var mongoConfig = require('./config/mongo');
 
 var env = app.get('env');
 var port = process.env.PORT || 9000;
+
+log4js.configure(require('./config/log4js.json'));
+app.use(log4js.connectLogger(log4js.getLogger("http"), { level: 'auto' }));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -51,11 +55,13 @@ app.use(express.static(path.join(__dirname, 'static', 'unzip')));
 
 routes(app);
 
+var appLog = log4js.getLogger('app');
+
 app.listen(port, function(err) {
   if (err) {
-    console.log(err);
+    appLog.error(err);
     return;
   }
 
-  console.log('Listening at http://localhost:' + port);
+  appLog.info('Listening on http://localhost:' + port);
 });

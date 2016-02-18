@@ -3,6 +3,8 @@ var code = require('../../utils/code');
 var AppHelper = require('../../helpers/app');
 var InitAppHelper = require('../../helpers/initApp');
 var uuid = require('uuid');
+var log4js = require('log4js');
+var clientLog = log4js.getLogger('client');
 
 exports.add = function(req, res) {
   var proname = req.body.pro_name;
@@ -30,7 +32,7 @@ exports.add = function(req, res) {
   }).then(function(app) {
     handler.send(res, code.SUCCESS, app);
   }).catch(function(err) {
-    console.log(err);
+    clientLog.error('add app: ', err);
     handler.handleError(res, code.FAILURE, err);
   });
 };
