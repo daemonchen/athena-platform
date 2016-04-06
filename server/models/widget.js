@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * 组件模型
+ */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var lastMod = require('../utils/mongoose-lastMod');
@@ -11,8 +14,8 @@ var WidgetSchema = new Schema({
   //author: {type: Schema.Types.ObjectId, ref: 'User'},
   app: {type: String, ref: 'App'},
   module: {type: String, ref: 'Mod'},
-  loadedBy: [{type: Schema.Types.ObjectId, ref: 'Page'}],
-  preview: {type: String, default: ''}
+  loadedBy: [{type: Schema.Types.ObjectId, ref: 'Page'}], //被哪些页面引用
+  preview: {type: String, default: ''} // 预览地址
 });
 
 WidgetSchema.plugin(lastMod);

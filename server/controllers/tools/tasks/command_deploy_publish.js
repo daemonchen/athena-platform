@@ -21,6 +21,7 @@ module.exports = function(params, res) {
         app: params.appId,
         author: params.user,
         module: params.moduleId
+        //modules: params.moduleId
       });
     }).then(function(command) {
       handler.send(res, code.SUCCESS, command);

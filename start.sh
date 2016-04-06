@@ -1,6 +1,10 @@
-#! /bin/bash
-cd client
-node server.js &
+#!/bin/bash
 
-cd ../server
-node app.js &
+echo 'start server...'
+cd server/
+nodemon app.js --ignore static/ &
+
+echo 'start client...'
+cd ../client/
+node server.js
+

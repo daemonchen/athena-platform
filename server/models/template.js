@@ -1,3 +1,8 @@
+'use strict';
+/**
+ * 模板模型
+ * 用于记录模板添加纪录以及更新记录
+ */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var lastMod = require('../utils/mongoose-lastMod');

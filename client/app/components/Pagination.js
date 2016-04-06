@@ -24,7 +24,7 @@ export default class Pagination extends Component {
           pages = [pagination.count - 4, pagination.count - 3, pagination.count - 2, pagination.count -1, pagination.count];
         }
       }
-   }
+    }
 
     return (
       <ul className="pagination">

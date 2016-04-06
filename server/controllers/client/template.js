@@ -9,6 +9,7 @@ var tempConfig = require('../../config/template');
 var templatePath = tempConfig.path;
 var zipPath = path.join(tempConfig.zip, 'template.zip');
 var zip = new AdmZip();
+var exec = require('child_process').exec;
 var log4js = require('log4js');
 var clientLog = log4js.getLogger('client');
 
@@ -189,10 +190,17 @@ exports.get = function(req, res) {
 };
 
 function zipTemplate() {
-  try {
-    zip.addLocalFolder(templatePath);
-    zip.writeZip(zipPath);
-  } catch(e) {
-    clientLog.error('template: ', e);
-  }
+  var child = exec('cd ' + templatePath + ' && zip -q -r template.zip * && mv template.zip ../tmp/',
+    function(error, stdout, stderr) {
+      if (error !== null) {
+        console.log('exec error: ', error);
+        clientLog.error('template', error);
+      }
+  });
+/*  try {*/
+    //zip.addLocalFolder(templatePath);
+    //zip.writeZip(zipPath);
+  //} catch(e) {
+    //clientLog.error('template: ', e);
+  /*}*/
 }

@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+ * athena版本模型
+ * athena版本控制，用于自动更新本地版本
+ */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var lastMod = require('../utils/mongoose-lastMod');

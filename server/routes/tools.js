@@ -9,6 +9,7 @@ var template = require('../controllers/tools/template');
 var app = require('../controllers/tools/app');
 var deleteController = require('../controllers/tools/delete');
 var version = require('../controllers/tools/version');
+var gbVersion = require('../controllers/tools/gb_version');
 
 var uploadSetting = multer({
   dest: path.join(uploadConfig.path, 'source')
@@ -26,5 +27,8 @@ router.post('/delete', deleteController.index);
 
 router.get('/version', version.index);
 router.post('/version', version.update)
+
+router.get('/gb', gbVersion.index);
+router.get('/gb/version', gbVersion.md5);
 
 module.exports = router;

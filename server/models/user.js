@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * 用户模型
+ */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var userPlugin = require('mongoose-user');

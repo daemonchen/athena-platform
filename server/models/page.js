@@ -1,3 +1,7 @@
+'use strict';
+/**
+ * 页面模型
+ */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var lastMod = require('../utils/mongoose-lastMod');

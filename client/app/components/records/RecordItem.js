@@ -47,7 +47,7 @@ export default class RecordItem extends Component {
     case 'publish':
       item = (
         <div className="detail">
-          <Link to={url} query={{author: record.author}}>{record.author}</Link> 发布了项目 <Link to={`/project/${record.app._id}`}>{record.app.name}</Link> 中的模块 <strong>{record.module.name}</strong>
+          <Link to={url} query={{author: record.author}}>{record.author}</Link> 发布了项目 <Link to={`/project/${record.app._id}`}>{record.app.name}</Link> 中的模块 <strong>{record.module && record.module.name}</strong>
           <p className="cmd">cmd: <i className="material-icons">publish</i></p>
           <p>appid: {record.app._id}</p>
         </div>

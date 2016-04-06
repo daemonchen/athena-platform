@@ -78,7 +78,6 @@ exports.index = function(req, res) {
       }).catch(function(err) {
         toolsLog.error('upload error: ', err, req.body);
       });
-
     } else {
       handler.handleError(res, code.FAILURE, 'file is not exists');
     }
