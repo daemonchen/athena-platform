@@ -22,7 +22,7 @@
 	├── README.md
 	├── client                              -客户端
 	│   ├── app                             -源文件目录
-	│   ├── app.js                          -入口文件
+	│   ├── app.js                          -启动脚本
 	│   ├── build                           -开发中的编译目录
 	│   ├── node_modules
 	│   ├── package.json

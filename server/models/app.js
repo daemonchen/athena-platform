@@ -1,6 +1,8 @@
+'use strict';
 /**
  * 项目数据表
  */
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var lastMod = require('../utils/mongoose-lastMod');

@@ -1,3 +1,8 @@
+/**
+ * 组件辅助器
+ */
+'use strict';
+
 var Widget = require('../models/widget');
 
 exports.create = function(params) {
@@ -17,10 +22,6 @@ exports.findOne = function(params) {
     Widget.findOne(params).populate('module').exec(function(err, widget) {
       if (err) {
         reject(err);
-      }
-
-      if (!widget) {
-        reject('widget is not found');
       }
 
       resolve(widget);

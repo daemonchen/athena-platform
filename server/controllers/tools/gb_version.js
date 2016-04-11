@@ -1,3 +1,6 @@
+/**
+ * 保存gb模块的版本号，用于同步更新模块
+ */
 var path = require('path');
 var fs = require('fs');
 var handler = require('../../utils/handler');
@@ -9,6 +12,9 @@ var CssHelper = require('../../helpers/css');
 var uploadConfig = require('../../config/upload');
 var md5File = require('md5-file');
 
+/**
+ * 获取gb模块map.json文件的内容
+ */
 exports.index = function(req, res) {
   var app = req.query.app;
 
@@ -37,6 +43,9 @@ exports.index = function(req, res) {
 
 };
 
+/**
+ * 获取gb模块map.json的md5加密串
+ */
 exports.md5 = function(req, res) {
   var app = req.query.app;
 

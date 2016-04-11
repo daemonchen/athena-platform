@@ -1,3 +1,6 @@
+/**
+ * 命令使用记录
+ */
 var appTask = require('./tasks/command_app');
 var moduleTask = require('./tasks/command_module');
 var pageTask = require('./tasks/command_page');

@@ -9,6 +9,9 @@ var md5File = require('md5-file');
 var log4js = require('log4js');
 var toolsLog = log4js.getLogger('tools');
 
+/**
+ * 获取所有模板版本
+ */
 exports.index = function(req, res) {
   TemplateHelper.findAll().then(function(templates) {
     var ret = {
@@ -41,6 +44,9 @@ exports.index = function(req, res) {
   });
 };
 
+/**
+ * 下载模板包
+ */
 exports.download = function(req, res) {
   res.setHeader('Content-disposition', 'attachment; filename=template.zip');
   res.setHeader('Content-type', 'application/zip, application/x-zip');

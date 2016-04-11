@@ -1,3 +1,8 @@
+'use strict';
+/**
+ * 命令模型
+ */
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 

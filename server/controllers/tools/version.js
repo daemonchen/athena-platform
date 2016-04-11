@@ -1,9 +1,15 @@
+/**
+ * 本地工具版本号控制
+ */
 var VersionHelper = require('../../helpers/version');
 var handler = require('../../utils/handler');
 var code = require('../../utils/code');
 var log4js = require('log4js');
 var toolsLog = log4js.getLogger('tools');
 
+/**
+ * 获取当前版本号
+ */
 exports.index = function(req, res) {
   VersionHelper.findOne().then(function(version) {
     if (!version) {
@@ -19,6 +25,9 @@ exports.index = function(req, res) {
   });
 };
 
+/**
+ * 更新版本号
+ */
 exports.update = function(req, res) {
   var ver = req.body.version;
 

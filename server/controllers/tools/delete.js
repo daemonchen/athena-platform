@@ -7,6 +7,9 @@ var code = require('../../utils/code');
 var log4js = require('log4js');
 var toolsLog = log4js.getLogger('tools');
 
+/**
+ * 删除控制器
+ */
 exports.index = function(req, res) {
   var cmd = req.body.cmd;
   var appId = req.body.app;
